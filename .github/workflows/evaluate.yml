@@ -25,14 +25,17 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Execute independent credit-risk benchmark
-        run: python -m src.train --output-dir results --no-shap
+        run: python -m src.train --output-dir results
       - name: Generate exploratory data analysis figures
         run: python -m src.eda
+      - name: Execute and save Jupyter notebook
+        run: jupyter nbconvert --to notebook --execute notebooks/credit_risk_walkthrough.ipynb --output credit_risk_walkthrough.ipynb --output-dir notebooks --ExecutePreprocessor.timeout=900
       - name: Publish verified results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f results/metrics.json results/model_comparison.json results/evaluation.png results/eda
+          git add -f results/metrics.json results/model_comparison.json results/evaluation.png results/eda notebooks/credit_risk_walkthrough.ipynb
+          if [ -f results/shap_importance.csv ] && [ -f results/shap_bar.png ]; then git add -f results/shap_importance.csv results/shap_bar.png; fi
           if ! git diff --cached --quiet; then
             git commit -m "Add automatically generated verified credit-risk results"
             git pull --rebase origin main
