@@ -22,11 +22,13 @@ jobs:
         run: pip install -r requirements.txt
       - name: Execute independent credit-risk benchmark
         run: python -m src.train --output-dir results --no-shap
+      - name: Generate exploratory data analysis figures
+        run: python -m src.eda
       - name: Publish verified results
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f results/metrics.json results/model_comparison.json results/evaluation.png
+          git add -f results/metrics.json results/model_comparison.json results/evaluation.png results/eda
           if ! git diff --cached --quiet; then
             git commit -m "Add automatically generated verified credit-risk results"
             git push
