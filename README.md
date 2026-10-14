@@ -44,6 +44,28 @@ jupyter lab notebooks/credit_risk_walkthrough.ipynb
 - Sigmoid calibration is trained only from training folds. The held-out test set is used for evaluation, never calibration fitting.
 - SHAP (if installed) explains the underlying uncalibrated estimator on a small sample, not a causal mechanism or calibrated risk.
 
+## Exploratory data analysis (EDA)
+
+The repository includes a reproducible EDA script (`python -m src.eda`). GitHub Actions generates and commits the images in `results/eda/`.
+
+**Target distribution**
+
+![Credit risk outcome counts](results/eda/target_distribution.png)
+
+**Missing-value assessment**
+
+![Missing values by feature](results/eda/missing_values.png)
+
+**Numerical distributions**
+
+![Histograms of numerical features](results/eda/numeric_distributions.png)
+
+**Correlation matrix**
+
+![Pearson correlation heatmap](results/eda/correlation_heatmap.png)
+
+These figures are descriptive and do not establish causality. [See EDA summary](results/eda/eda_summary.json).
+
 ## Verified results — GitHub Actions run #1
 
 The independent UCI benchmark evaluation completed successfully on GitHub Actions, with 1,000 records (800 training; 200 held-out test), and 30% bad-credit labels.
