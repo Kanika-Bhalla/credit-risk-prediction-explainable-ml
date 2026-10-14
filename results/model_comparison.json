@@ -1,0 +1,19 @@
+[
+  {
+    "model":"Logistic Regression",
+    "cv_average_precision":0.6160987286,
+    "best_params":{
+      "model__C":0.1,
+      "model__class_weight":null
+    }
+  },
+  {
+    "model":"Random Forest",
+    "cv_average_precision":0.6357326145,
+    "best_params":{
+      "model__class_weight":null,
+      "model__min_samples_leaf":2,
+      "model__n_estimators":150
+    }
+  }
+]

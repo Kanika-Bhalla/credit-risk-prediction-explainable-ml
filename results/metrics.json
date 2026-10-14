@@ -1,0 +1,24 @@
+{
+  "dataset": "UCI Statlog German Credit (CC BY 4.0)",
+  "rows": 1000,
+  "bad_risk_fraction": 0.3,
+  "train_rows": 800,
+  "test_rows": 200,
+  "selected_model": "Random Forest",
+  "threshold": 0.33999999999999997,
+  "validation_oof_brier": 0.16119545405211666,
+  "test": {
+    "roc_auc": 0.8013095238095238,
+    "average_precision": 0.651408220715531,
+    "brier": 0.15775646550969236,
+    "log_loss": 0.4820693699974699,
+    "precision": 0.56,
+    "recall": 0.7,
+    "f1": 0.6222222222222222,
+    "tn": 107,
+    "fp": 33,
+    "fn": 18,
+    "tp": 42
+  },
+  "warning": "Educational benchmark, not a deployment-ready lending decision system."
+}
