@@ -7,6 +7,8 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from ucimlrepo import fetch_ucirepo
 
+FEATURE_LABELS = {"Attribute1":"Checking account status","Attribute2":"Loan duration (months)","Attribute3":"Credit history","Attribute4":"Loan purpose","Attribute5":"Credit amount","Attribute6":"Savings account","Attribute7":"Employment duration","Attribute8":"Installment rate","Attribute9":"Personal status / sex","Attribute10":"Other debtors","Attribute11":"Residence duration","Attribute12":"Property","Attribute13":"Age","Attribute14":"Other installment plans","Attribute15":"Housing","Attribute16":"Existing credits","Attribute17":"Job category","Attribute18":"Dependents","Attribute19":"Telephone","Attribute20":"Foreign worker"}
+
 def run(output_dir="results/eda"):
     out=Path(output_dir);out.mkdir(parents=True,exist_ok=True)
     ds=fetch_ucirepo(id=144)
@@ -38,14 +40,14 @@ def run(output_dir="results/eda"):
         for ax,col in zip(axs.flat,cols):
             ax.set_visible(True)
             ax.hist(numeric[col].dropna(),bins=20,color="#3987be",edgecolor="white")
-            ax.set_title(col);ax.set_ylabel("Count")
+            ax.set_title(FEATURE_LABELS.get(col,col));ax.set_ylabel("Count")
         fig.suptitle("Numerical feature distributions")
         fig.tight_layout();fig.savefig(out/"numeric_distributions.png",dpi=160);plt.close(fig)
         c=numeric.corr()
         fig,ax=plt.subplots(figsize=(max(7,len(c)*.65),max(6,len(c)*.6)))
         im=ax.imshow(c,cmap="coolwarm",vmin=-1,vmax=1)
-        ax.set_xticks(range(len(c)));ax.set_xticklabels(c.columns,rotation=60,ha="right",fontsize=8)
-        ax.set_yticks(range(len(c)));ax.set_yticklabels(c.index,fontsize=8)
+        ax.set_xticks(range(len(c)));ax.set_xticklabels([FEATURE_LABELS.get(x,x) for x in c.columns],rotation=60,ha="right",fontsize=8)
+        ax.set_yticks(range(len(c)));ax.set_yticklabels([FEATURE_LABELS.get(x,x) for x in c.index],fontsize=8)
         fig.colorbar(im,ax=ax,label="Pearson r")
         ax.set_title("Numeric feature correlations (descriptive)")
         fig.tight_layout();fig.savefig(out/"correlation_heatmap.png",dpi=160);plt.close(fig)
@@ -61,7 +63,7 @@ def run(output_dir="results/eda"):
         fig,ax=plt.subplots(figsize=(9,4))
         ax.bar(rates.index.astype(str),rates.rate,color="#db8055")
         ax.set_ylim(0,1);ax.set_ylabel("Observed bad-credit proportion")
-        ax.set_title(f"Observed risk by {col} (groups with n ≥ 20)")
+        ax.set_title(f"Observed risk by {FEATURE_LABELS.get(col,col)} (n ≥ 20)")
         ax.tick_params(axis="x",rotation=35)
         fig.tight_layout();fig.savefig(out/f"risk_by_{col}.png",dpi=160);plt.close(fig)
 
