@@ -1,0 +1,27 @@
+{
+  "total_records": 1000,
+  "num_features": 20,
+  "bad_credit_rate": 0.3,
+  "missing_by_feature": {
+    "Attribute1": 0,
+    "Attribute2": 0,
+    "Attribute3": 0,
+    "Attribute4": 0,
+    "Attribute5": 0,
+    "Attribute6": 0,
+    "Attribute7": 0,
+    "Attribute8": 0,
+    "Attribute9": 0,
+    "Attribute10": 0,
+    "Attribute11": 0,
+    "Attribute12": 0,
+    "Attribute13": 0,
+    "Attribute14": 0,
+    "Attribute15": 0,
+    "Attribute16": 0,
+    "Attribute17": 0,
+    "Attribute18": 0,
+    "Attribute19": 0,
+    "Attribute20": 0
+  }
+}
